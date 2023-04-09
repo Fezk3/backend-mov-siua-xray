@@ -102,6 +102,10 @@ data class User(
     )
     var roleList: Set<Role>,
 
+    @OneToMany(mappedBy = "user")
+    var scheduleList: Set<Schedule>,
+
+
 ){
 
     override fun equals(other: Any?): Boolean {
@@ -125,3 +129,115 @@ data class User(
     }
 
 }
+@Entity
+@Table(name = "college")
+data class College(
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        var id: Long? = null,
+        var name: String,
+
+        @OneToMany(mappedBy = "college")
+        var classroomList: Set<Classroom>,
+
+    ){
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is College) return false
+
+            if (id != other.id) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            return id?.hashCode() ?: 0
+        }
+
+        override fun toString(): String {
+            return "College(id=$id, name='$name',classroomList=$classroomList)"
+        }
+
+    }
+@Entity
+@Table(name = "classroom")
+data class Classroom(
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        var id: Long? = null,
+        var classNumber: String,
+        var peopleCapacity: Int,
+
+        // Entity Relationship
+        @ManyToOne
+        @JoinColumn(name = "IdCollege")
+        var collegelist: College,
+
+        @OneToMany(mappedBy = "classroom")
+        var scheduleList: Set<Schedule>,
+
+    ){
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Classroom) return false
+
+            if (id != other.id) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            return id?.hashCode() ?: 0
+        }
+
+        override fun toString(): String {
+            return "Classroom(id=$id, classnumber=$classNumber,peopleCapacity=$peopleCapacity ,collegeList=$collegelist,scheduleList=$scheduleList)"
+        }
+
+    }
+@Entity
+@Table(name = "schedule")
+data class Schedule(
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        var id: Long? = null,
+        var courseName: String,
+        var date: Date,
+        var startTime: String,
+        var endTime: String,
+
+
+        // Entity Relationship
+        @ManyToOne
+        @JoinColumn(name = "IdClassroom")
+        var classroom: Classroom,
+
+        @ManyToOne
+        @JoinColumn(name = "IdUser")
+        var user: User,
+
+    ){
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Schedule) return false
+
+            if (id != other.id) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            return id?.hashCode() ?: 0
+        }
+
+        override fun toString(): String {
+            return "Schedule(id=$id, classroom=$classroom, courseName=$courseName, date=$date, startTime=$startTime, endTime=$endTime, user=$user)"
+        }
+
+    }

@@ -241,3 +241,78 @@ data class Schedule(
         }
 
     }
+    @Entity
+@Table(name = "form")
+data class Form(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+
+    // Entity Relationship con Classroom
+    @ManyToOne
+    @JoinColumn(name = "IdClassroom")
+    var classroom: Classroom,
+
+
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Form) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "Form(id=$id, classroom=$classroom)"
+    }
+
+}
+
+@Entity
+@Table(name = "formHistory")
+data class FormHistory(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+
+    // Entity Relationship con Classroom
+    @ManyToOne
+    @JoinColumn(name = "IdForm")
+    var form: Form,
+
+    @ManyToOne
+    @JoinColumn(name = "IdUser")
+    var user: User,
+
+    var date: Date,
+    
+
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is FormHistory) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "FormHistory(id=$id, form=$form, user=$user)"
+    }
+
+}

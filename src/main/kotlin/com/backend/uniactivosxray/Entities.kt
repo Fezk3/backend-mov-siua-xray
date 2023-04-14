@@ -351,3 +351,35 @@ data class State(
 
 }
 
+
+@Entity
+@Table(name = "assetType")
+data class AssetType(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var description: String,
+
+    // Entity Relationship
+    @OneToMany(mappedBy = "assets")
+    var assetsList: Set<Assets>,
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Role) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "AssetType(id=$id, description='$description', assetsList=$assetsList)"
+    }
+}

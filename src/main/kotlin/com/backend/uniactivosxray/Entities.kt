@@ -351,7 +351,6 @@ data class State(
 
 }
 
-
 @Entity
 @Table(name = "assetType")
 data class AssetType(
@@ -382,4 +381,45 @@ data class AssetType(
     override fun toString(): String {
         return "AssetType(id=$id, description='$description', assetsList=$assetsList)"
     }
+}
+
+@Entity
+@Table(name = "assets")
+data class Assets(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var name: String,
+    var quantity: Int,
+
+    // Entity Relationship
+    @ManyToOne
+    @JoinColumn(name = "IdClassroom")
+    var classroomlist: Classroom,
+
+    @ManyToOne
+    @JoinColumn(name = "IdAssetType")
+    var assetType: AssetType,
+
+
+    ){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Role) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "Assets(id=$id, name='$name', quantity=$quantity, classroomList=$classroomlist, assetType=$assetType)"
+    }
+
 }

@@ -28,3 +28,8 @@ interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
 interface CollegeRepository : JpaRepository<College, Long> {
     fun findByName(@Param("name") name : String) : Optional<College>
 }
+
+@Repository
+interface ClassroomRepository : JpaRepository<Classroom, Long> {
+    fun findByName(@Param("name") name : String) : Optional<Classroom>
+}

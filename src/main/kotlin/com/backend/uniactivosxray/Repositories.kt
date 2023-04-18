@@ -33,3 +33,7 @@ interface CollegeRepository : JpaRepository<College, Long> {
 interface ClassroomRepository : JpaRepository<Classroom, Long> {
     fun findByName(@Param("name") name : String) : Optional<Classroom>
 }
+
+@Repository
+interface ScheduleRepository : JpaRepository<Schedule, Long> {
+}

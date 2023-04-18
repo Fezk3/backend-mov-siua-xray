@@ -23,3 +23,8 @@ interface AssetsRepository : JpaRepository<Assets, Long> {
 @Repository
 interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
 }
+
+@Repository
+interface CollegeRepository : JpaRepository<College, Long> {
+    fun findByName(@Param("name") name : String) : Optional<College>
+}

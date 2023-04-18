@@ -15,3 +15,7 @@ interface UserRepository : JpaRepository<User, Long> {
 interface RoleRepository : JpaRepository<Role, Long> {
     fun findByName (@Param("name") name : String) : Optional<Role>
 }
+
+@Repository
+Interface AssetsRepository : JpaRepository<Product, Long> {
+}

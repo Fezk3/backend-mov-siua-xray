@@ -19,3 +19,7 @@ interface RoleRepository : JpaRepository<Role, Long> {
 @Repository
 Interface AssetsRepository : JpaRepository<Product, Long> {
 }
+
+@Repository
+interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
+}

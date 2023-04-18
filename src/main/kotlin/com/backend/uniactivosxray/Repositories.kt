@@ -18,6 +18,7 @@ interface RoleRepository : JpaRepository<Role, Long> {
 
 @Repository
 interface AssetsRepository : JpaRepository<Assets, Long> {
+    fun findByName(@Param("name") name : String) : Optional<Assets>
 }
 
 @Repository

@@ -241,3 +241,185 @@ data class Schedule(
         }
 
     }
+    @Entity
+@Table(name = "form")
+data class Form(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+
+    // Entity Relationship con Classroom
+    @ManyToOne
+    @JoinColumn(name = "IdClassroom")
+    var classroom: Classroom,
+
+
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Form) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "Form(id=$id, classroom=$classroom)"
+    }
+
+}
+
+@Entity
+@Table(name = "formHistory")
+data class FormHistory(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+
+    // Entity Relationship con Classroom
+    @ManyToOne
+    @JoinColumn(name = "IdForm")
+    var form: Form,
+
+    @ManyToOne
+    @JoinColumn(name = "IdUser")
+    var user: User,
+
+    var date: Date,
+    
+
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is FormHistory) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "FormHistory(id=$id, form=$form, user=$user)"
+    }
+
+}
+
+@Entity
+@Table(name = "state")
+data class State(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var description: String,
+
+    // Entity Relationship
+    @OneToMany(mappedBy = "formHistory")
+    var formHistoryList: Set<FormHistory>,
+
+    ){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Role) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "State(id=$id, description='$description', formHistoryList=$formHistoryList)"
+    }
+
+}
+
+@Entity
+@Table(name = "assetType")
+data class AssetType(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var description: String,
+
+    // Entity Relationship
+    @OneToMany(mappedBy = "assets")
+    var assetsList: Set<Assets>,
+){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Role) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "AssetType(id=$id, description='$description', assetsList=$assetsList)"
+    }
+}
+
+@Entity
+@Table(name = "assets")
+data class Assets(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var name: String,
+    var quantity: Int,
+
+    // Entity Relationship
+    @ManyToOne
+    @JoinColumn(name = "IdClassroom")
+    var classroomlist: Classroom,
+
+    @ManyToOne
+    @JoinColumn(name = "IdAssetType")
+    var assetType: AssetType,
+
+
+    ){
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Role) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "Assets(id=$id, name='$name', quantity=$quantity, classroomList=$classroomlist, assetType=$assetType)"
+    }
+
+}

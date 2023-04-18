@@ -17,7 +17,7 @@ interface RoleRepository : JpaRepository<Role, Long> {
 }
 
 @Repository
-Interface AssetsRepository : JpaRepository<Product, Long> {
+interface AssetsRepository : JpaRepository<Assets, Long> {
 }
 
 @Repository

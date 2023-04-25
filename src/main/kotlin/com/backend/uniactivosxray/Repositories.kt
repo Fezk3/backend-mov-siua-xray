@@ -33,6 +33,9 @@ interface CollegeRepository : JpaRepository<College, Long> {
 @Repository
 interface ClassroomRepository : JpaRepository<Classroom, Long> {
     fun findByClassNumber (@Param("classNumber") classNumber : String) : Optional<Classroom>
+
+    fun findByCollegeName(@Param("name") name : String) : List<Classroom>
+
 }
 
 @Repository

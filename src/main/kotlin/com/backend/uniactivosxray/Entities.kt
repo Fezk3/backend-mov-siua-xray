@@ -133,72 +133,73 @@ data class User(
 @Table(name = "college")
 data class College(
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        var id: Long? = null,
-        var name: String,
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var name: String = "",
 
-        @OneToMany(mappedBy = "college")
-        var classroomList: Set<Classroom>,
+    @OneToMany(mappedBy = "college")
+    var classroomList: Set<Classroom>,
 
-    ){
+    ) {
 
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (other !is College) return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is College) return false
 
-            if (id != other.id) return false
+        if (id != other.id) return false
 
-            return true
-        }
-
-        override fun hashCode(): Int {
-            return id?.hashCode() ?: 0
-        }
-
-        override fun toString(): String {
-            return "College(id=$id, name='$name',classroomList=$classroomList)"
-        }
-
+        return true
     }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "College(id=$id, name='$name',classroomList=$classroomList)"
+    }
+
+}
+
 @Entity
 @Table(name = "classroom")
 data class Classroom(
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        var id: Long? = null,
-        var classNumber: String,
-        var peopleCapacity: Int,
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+    var classNumber: String,
+    var peopleCapacity: Int,
 
-        // Entity Relationship
-        @ManyToOne
-        @JoinColumn(name = "IdCollege")
-        var collegelist: College,
+    // Entity Relationship
+    @ManyToOne
+    @JoinColumn(name = "IdCollege")
+    var college: College,
 
-        @OneToMany(mappedBy = "classroom")
-        var scheduleList: Set<Schedule>,
+    @OneToMany(mappedBy = "classroom")
+    var scheduleList: Set<Schedule>,
 
-    ){
+    ) {
 
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (other !is Classroom) return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Classroom) return false
 
-            if (id != other.id) return false
+        if (id != other.id) return false
 
-            return true
-        }
-
-        override fun hashCode(): Int {
-            return id?.hashCode() ?: 0
-        }
-
-        override fun toString(): String {
-            return "Classroom(id=$id, classnumber=$classNumber,peopleCapacity=$peopleCapacity ,collegeList=$collegelist,scheduleList=$scheduleList)"
-        }
-
+        return true
     }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+
+    override fun toString(): String {
+        return "Classroom(id=$id, classNumber=$classNumber, peopleCapacity=$peopleCapacity, college=$college, scheduleList=$scheduleList)"
+    }
+
+}
 @Entity
 @Table(name = "schedule")
 data class Schedule(
@@ -241,7 +242,7 @@ data class Schedule(
         }
 
     }
-    @Entity
+@Entity
 @Table(name = "form")
 data class Form(
 
@@ -249,7 +250,6 @@ data class Form(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
-    // Entity Relationship con Classroom
     @ManyToOne
     @JoinColumn(name = "IdClassroom")
     var classroom: Classroom,
@@ -284,7 +284,7 @@ data class FormHistory(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
-    // Entity Relationship con Classroom
+    // Entity Relationship with Form
     @ManyToOne
     @JoinColumn(name = "IdForm")
     var form: Form,
@@ -294,8 +294,10 @@ data class FormHistory(
     var user: User,
 
     var date: Date,
-    
 
+    @ManyToOne
+    @JoinColumn(name = "IdState")
+    var state: State
 ){
 
     override fun equals(other: Any?): Boolean {
@@ -326,11 +328,10 @@ data class State(
     var id: Long? = null,
     var description: String,
 
-    // Entity Relationship
-    @OneToMany(mappedBy = "formHistory")
+    // Entity Relationship with FormHistory
+    @OneToMany(mappedBy = "state")
     var formHistoryList: Set<FormHistory>,
-
-    ){
+){
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -361,9 +362,10 @@ data class AssetType(
     var description: String,
 
     // Entity Relationship
-    @OneToMany(mappedBy = "assets")
+    @OneToMany(mappedBy = "assetType")
     var assetsList: Set<Assets>,
-){
+
+    ){
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

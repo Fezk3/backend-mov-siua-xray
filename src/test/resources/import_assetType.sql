@@ -1,3 +1,3 @@
 
-INSERT INTO public.assetType(id,description) VALUES (1,'Estatico');
-INSERT INTO public.assetType(id,description) VALUES (2,'Dinamico');
+INSERT INTO public.asset_type(id,description) VALUES (1,'Estatico');
+INSERT INTO public.asset_type(id,description) VALUES (2,'Dinamico');

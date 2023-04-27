@@ -51,6 +51,7 @@ interface AssetTypeRepository : JpaRepository<AssetType, Long> {
 
 @Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
+    fun findByUserId(@Param("userId") userId : Long) : List<Schedule>
 }
 
 @Repository

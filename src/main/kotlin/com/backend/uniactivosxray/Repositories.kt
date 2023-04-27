@@ -62,3 +62,8 @@ interface FormRepository : JpaRepository<Form, Long> {
 interface StateRepository : JpaRepository<State, Long> {
     fun findByDescription(@Param("description") description : String) : Optional<State>
 }
+
+@Repository
+interface PrivilegeRepository : JpaRepository<Privilege, Long> {
+    fun findByName(@Param("name") name : String) : Optional<Privilege>
+}

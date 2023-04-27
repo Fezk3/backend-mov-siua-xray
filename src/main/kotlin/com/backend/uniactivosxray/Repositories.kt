@@ -57,3 +57,8 @@ interface ScheduleRepository : JpaRepository<Schedule, Long> {
 @Repository
 interface FormRepository : JpaRepository<Form, Long> {
 }
+
+@Repository
+interface StateRepository : JpaRepository<State, Long> {
+    fun findByDescription(@Param("description") description : String) : Optional<State>
+}

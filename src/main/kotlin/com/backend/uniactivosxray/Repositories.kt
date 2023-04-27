@@ -45,5 +45,10 @@ interface ClassroomRepository : JpaRepository<Classroom, Long> {
 }
 
 @Repository
+interface AssetTypeRepository : JpaRepository<AssetType, Long> {
+    fun findByDescription(@Param("description") description : String) : List<AssetType>
+}
+
+@Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
 }

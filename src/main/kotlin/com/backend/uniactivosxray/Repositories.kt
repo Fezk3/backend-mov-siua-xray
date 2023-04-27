@@ -46,4 +46,6 @@ interface ClassroomRepository : JpaRepository<Classroom, Long> {
 
 @Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
+    fun findByUserId(@Param("userId") userId : Long) : List<Schedule>
+
 }

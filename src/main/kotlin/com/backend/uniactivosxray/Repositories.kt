@@ -52,3 +52,7 @@ interface AssetTypeRepository : JpaRepository<AssetType, Long> {
 @Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
 }
+
+@Repository
+interface FormRepository : JpaRepository<Form, Long> {
+}

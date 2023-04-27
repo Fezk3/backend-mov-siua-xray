@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 @SpringBootTest
-@Sql("/import_schedule.sql", "/import_classroom.sql", "/import_users.sql")
+@Sql("/import_users.sql", "/import_college.sql", "/import_classroom.sql", "/import_schedule.sql")
 
 class ScheduleRepositoryTest (
     @Autowired

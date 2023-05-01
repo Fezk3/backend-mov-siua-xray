@@ -180,6 +180,9 @@ data class Classroom(
     @OneToMany(mappedBy = "classroom")
     var scheduleList: Set<Schedule>,
 
+    @OneToMany(mappedBy = "assets")
+    var assetsList: Set<Assets>
+
     ) {
 
     override fun equals(other: Any?): Boolean {
@@ -398,7 +401,7 @@ data class Assets(
     // Entity Relationship
     @ManyToOne
     @JoinColumn(name = "IdClassroom")
-    var classroomlist: Classroom,
+    var classroom: Classroom,
 
     @ManyToOne
     @JoinColumn(name = "IdAssetType")
@@ -421,7 +424,7 @@ data class Assets(
     }
 
     override fun toString(): String {
-        return "Assets(id=$id, name='$name', quantity=$quantity, classroomList=$classroomlist, assetType=$assetType)"
+        return "Assets(id=$id, name='$name', quantity=$quantity, classroom=$classroom, assetType=$assetType)"
     }
 
 }

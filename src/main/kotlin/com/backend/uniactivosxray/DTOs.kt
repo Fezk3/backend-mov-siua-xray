@@ -1,5 +1,6 @@
 package com.backend.uniactivosxray
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.*
 
 data class UserLoginInput(
@@ -78,6 +79,7 @@ data class FormHistoryInput(
     var formId: Long? = null,
     var userId: Long? = null,
     var statusId: Long? = null,
+    @JsonFormat(pattern="dd/MM/yyyy")
     var date: Date? = null,
 )
 

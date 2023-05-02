@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+    kotlin("kapt") version "1.5.5"
 }
 
 group = "com.backend.uniactivosxray"
@@ -17,6 +18,8 @@ repositories {
 }
 
 dependencies {
+	implementation("og.mapstruct:mapstruct:1.5.5.Final")
+	annotationProcessor("og.mapstruct:mapstruct-processor:1.5.5.Final")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

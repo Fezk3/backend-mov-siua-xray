@@ -6,7 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
-	kotlin("kapt") version "1.4.32"
+	kotlin("kapt") version "1.4.32" // 1.5.10
 }
 
 group = "com.backend.uniactivosxray"
@@ -18,6 +18,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
 	kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	annotationProcessor ("org.mapstruct:mapstruct:1.5.5.Final")

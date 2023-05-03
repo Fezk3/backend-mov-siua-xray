@@ -20,10 +20,11 @@ interface RoleRepository : JpaRepository<Role, Long> {
 interface AssetsRepository : JpaRepository<Assets, Long> {
     fun findByName(@Param("name") name : String) : Optional<Assets>
 
-    fun findByClassroomlistId(@Param("idClassroom") idClassroom: Long): List<Assets>
+    fun findByClassroom_Id(@Param("classroomId") classroomId: Long): List<Assets>
 
-    @Query("SELECT a FROM Assets a WHERE a.classroomlist IN (SELECT c FROM Classroom c WHERE c.classNumber = :classNumber)")
+    @Query("SELECT a FROM Assets a WHERE a.classroom IN (SELECT c FROM Classroom c WHERE c.classNumber = :classNumber)")
     fun findByClassroomNumber(@Param("classNumber") classNumber: String): List<Assets>
+
 
 }
 

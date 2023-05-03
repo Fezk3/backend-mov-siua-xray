@@ -180,10 +180,11 @@ data class Classroom(
     @OneToMany(mappedBy = "classroom")
     var scheduleList: Set<Schedule>,
 
-    @OneToMany(mappedBy = "assets")
-    var assetsList: Set<Assets>
+    @OneToMany(mappedBy = "classroom")
+    var assetsList: Set<Assets> = emptySet()
 
-    ) {
+
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

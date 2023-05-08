@@ -57,8 +57,8 @@ interface ClassroomMapper {
     ): ClassroomDetails
 
     fun classroomListToClassroomDetailsList(
-        classroomList: Set<Classroom>,
-    ): Set<ClassroomDetails>
+        classroomList: List<Classroom>,
+    ): List<ClassroomDetails>
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)

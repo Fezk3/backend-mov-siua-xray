@@ -34,8 +34,8 @@ interface AssetTypeMapper {
     ): AssetTypeDetails
 
     fun assetTypeListToAssetTypeDetailsList(
-        assetTypeList: Set<AssetType>,
-    ): Set<AssetTypeDetails>
+        assetTypeList: List<AssetType>,
+    ): List<AssetTypeDetails>
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -45,8 +45,8 @@ interface AssetsMapper {
     ): AssetsDetails
 
     fun assetsListToAssetsDetailsList(
-        assetsList: Set<Assets>,
-    ): Set<AssetsDetails>
+        assetsList: List<Assets>,
+    ): List<AssetsDetails>
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -67,8 +67,8 @@ interface FormMapper {
     ): FormDetails
 
     fun formListToFormDetailsList(
-        formList: Set<Form>,
-    ): Set<FormDetails>
+        formList: List<Form>,
+    ): List<FormDetails>
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -78,8 +78,8 @@ interface StatusMapper {
     ): StatusDetails
 
     fun statusListToStatusDetailsList(
-        statusList: Set<State>,
-    ): Set<StatusDetails>
+        statusList: List<State>,
+    ): List<StatusDetails>
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -89,8 +89,8 @@ interface ScheduleMapper {
     ): ScheduleDetails
 
     fun scheduleListToScheduleDetailsList(
-        scheduleList: Set<Schedule>,
-    ): Set<ScheduleDetails>
+        scheduleList: List<Schedule>,
+    ): List<ScheduleDetails>
 }
 
  @Mapper(
@@ -103,11 +103,11 @@ interface FormHistoryMapper {
     ): FormHistoryDetails
 
     fun formHistoryListToFormHistoryDetailsList(
-        formHistoryList: Set<FormHistory>,
-    ): Set<FormHistoryDetails>
+        formHistoryList: List<FormHistory>,
+    ): List<FormHistoryDetails>
 
      @Mapping(target = "date", defaultExpression = "java(new java.util.Date())")
-     fun FormHistoryInputToFormHistory(
+     fun formHistoryInputToFormHistory(
          formHistoryInput: FormHistoryInput,
      ): FormHistory
 

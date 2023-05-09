@@ -28,7 +28,7 @@ class AssetsRepositoryTest(
 
     @Test
     fun testAssetsFindByClassroom() {
-        val assetsList: List<Assets> = assetsRepository.findByClassroom_Id(1)
+        val assetsList: List<Assets> = assetsRepository.findByClassroomId(1)
         Assertions.assertTrue(assetsList.size == 2)
     }
 

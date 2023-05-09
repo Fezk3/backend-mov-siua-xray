@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service
 
 interface ClassroomService {
 
-    fun getall(): List<ClassroomDetails>
+    fun getAll(): List<ClassroomDetails>
 
-    fun getbyclassnumber(number: String): ClassroomDetails
+    fun getByClassNumber(number: String): ClassroomDetails
 
     fun getByCollegeName(collegeName: String): List<ClassroomDetails>
 
@@ -28,14 +28,14 @@ class ClassroomServiceImpl(
 
 ) : ClassroomService {
 
-    override fun getall(): List<ClassroomDetails> {
+    override fun getAll(): List<ClassroomDetails> {
 
         val classroomList: List<Classroom> = classroomRepository.findAll()
         return classroomMapper.classroomListToClassroomDetailsList(classroomList)
 
     }
 
-    override fun getbyclassnumber(number: String): ClassroomDetails {
+    override fun getByClassNumber(number: String): ClassroomDetails {
 
         val classroom: Classroom = classroomRepository.findByClassNumber(number).get()
         return classroomMapper.classroomToClassroomDetails(classroom)

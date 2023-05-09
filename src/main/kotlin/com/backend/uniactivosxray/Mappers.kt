@@ -19,14 +19,13 @@ interface RoleMapper {
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface CollegeMapper {
-    fun collegeToCollegeDetails(
-        priority: College,
-    ): CollegeDetails
+    fun collegeToCollegeDetails(priority: College): CollegeDetails
 
-    fun collegeListToCollegeDetailsList(
-        collegeList: Set<College>,
-    ): Set<CollegeDetails>
+    fun collegeListToCollegeDetailsList(collegeList: List<College>): List<CollegeDetails> {
+        return collegeList.map { college -> collegeToCollegeDetails(college) }
+    }
 }
+
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface AssetTypeMapper {

@@ -22,6 +22,9 @@ interface AssetsRepository : JpaRepository<Assets, Long> {
 
     fun findByClassroomId(@Param("classroomId") classroomId: Long): List<Assets>
 
+    @Query("SELECT a FROM Assets a WHERE a.assetType.description = :description AND a.classroom.id = :classroomId")
+    fun findByAssetTypeAndClassroomId(@Param("description") description: String, @Param("classroomId") classroomId: Long): List<Assets>
+
     @Query("SELECT a FROM Assets a WHERE a.classroom IN (SELECT c FROM Classroom c WHERE c.classNumber = :classNumber)")
     fun findByClassroomNumber(@Param("classNumber") classNumber: String): List<Assets>
 
@@ -53,6 +56,7 @@ interface AssetTypeRepository : JpaRepository<AssetType, Long> {
 @Repository
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
     fun findByUserId(@Param("userId") userId : Long) : List<Schedule>
+    fun findByClassroomId(@Param("classroomId") classroomId : Long) : List<Schedule>
 }
 
 @Repository

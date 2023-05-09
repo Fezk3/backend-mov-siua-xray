@@ -33,6 +33,12 @@ class AssetsRepositoryTest(
     }
 
     @Test
+    fun testAssetsFindByAssetTypeAndClassroomId() {
+        val assetsList: List<Assets> = assetsRepository.findByAssetTypeAndClassroomId("Dinamico", 1)
+        Assertions.assertTrue(assetsList.size == 1)
+    }
+
+    @Test
     fun testAssetsFindByClassroomNumber() {
         val assetsList: List<Assets> = assetsRepository.findByClassroomNumber("A-12")
         Assertions.assertTrue(assetsList.size == 2)

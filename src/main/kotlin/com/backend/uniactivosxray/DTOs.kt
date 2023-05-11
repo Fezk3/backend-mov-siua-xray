@@ -11,7 +11,7 @@ data class UserLoginInput(
 data class UserDetails(
     var id: Long? = null,
     var email: String? = null,
-    var name: String? = null,
+    var firstName: String? = null,
     var lastName: String? = null,
     var roleList: List<RoleDetails>? = null,
 )
@@ -59,7 +59,7 @@ data class ClassroomDetails(
     var id: Long? = null,
     var classNumber: String? = null,
     var college: CollegeDetails? = null,
-    var assets: List<AssetsDetails>? = null,
+    var assetsList: List<AssetsDetails>? = null,
 )
 
 data class FormDetails(
@@ -75,9 +75,9 @@ data class StatusDetails(
 data class FormHistoryDetails(
     var id: Long? = null,
     var form: FormDetails? = null,
-    var userId: Long? = null,
+    var user: UserDetails? = null,
     var date: Date? = null,
-    var status: StatusDetails? = null,
+    var state: StatusDetails? = null,
 )
 
 data class FormHistoryInput(

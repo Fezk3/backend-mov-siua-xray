@@ -4,6 +4,7 @@ import com.backend.uniactivosxray.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+
 interface FormHistoryService {
     fun getAll(): List<FormHistoryDetails>
     fun create(formHistoryInput: FormHistoryInput): FormHistory

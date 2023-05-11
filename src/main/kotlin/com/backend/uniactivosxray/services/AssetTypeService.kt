@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
+
 interface AssetTypeService {
     fun findAll(): List<AssetTypeDetails>
     fun getByDescription(description: String): List<AssetTypeDetails>

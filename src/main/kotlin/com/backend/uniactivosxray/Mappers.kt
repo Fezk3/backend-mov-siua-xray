@@ -3,6 +3,7 @@ package com.backend.uniactivosxray
 import org.mapstruct.*
 import java.time.LocalDateTime
 
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface PrivilegeMapper {
     fun privilegeListToPrivilegeDetailsList(

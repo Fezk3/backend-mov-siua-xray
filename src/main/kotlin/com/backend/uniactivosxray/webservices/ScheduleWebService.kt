@@ -5,6 +5,7 @@ import com.backend.uniactivosxray.services.ScheduleService
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
+
 @RestController
 @RequestMapping("/schedules")
 class ScheduleController(private val scheduleService: ScheduleService) {

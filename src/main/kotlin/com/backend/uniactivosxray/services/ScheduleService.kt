@@ -4,6 +4,7 @@ import com.backend.uniactivosxray.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+
 interface ScheduleService {
     fun getAll() : List<ScheduleDetails>
     fun getByUserId(userId : Long) : List<ScheduleDetails>

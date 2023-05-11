@@ -4,6 +4,7 @@ import com.backend.uniactivosxray.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+
 interface AssetService {
     fun getAll(): List<AssetsDetails>
     fun getByClassroomId(classroomId: Long): List<AssetsDetails>

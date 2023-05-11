@@ -16,6 +16,12 @@ data class UserDetails(
     var roleList: List<RoleDetails>? = null,
 )
 
+data class UserChangePasswordInput(
+    var email: String = "",
+    var oldPassword: String = "",
+    var newPassword: String = "",
+)
+
 data class PriorityDetails(
     var id: Long? = null,
     var label: String? = null,
@@ -84,11 +90,11 @@ data class FormHistoryInput(
 
 data class ScheduleDetails(
     var id: Long? = null,
-    var classroom: ClassroomDetails? = null,
     var courseName: String? = null,
-    var userId: Long? = null,
     var date: Date? = null,
-    var startTime : Date? = null,
-    var endTime : Date? = null,
+    var startTime : String? = null,
+    var endTime : String? = null,
+    var userId: Long? = null,
+    var classroom: ClassroomDetails? = null,
 )
 

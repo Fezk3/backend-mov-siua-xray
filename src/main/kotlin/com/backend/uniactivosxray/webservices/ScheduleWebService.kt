@@ -15,14 +15,13 @@ class ScheduleController(private val scheduleService: ScheduleService) {
         return scheduleService.getAll()
     }
 
-
-    @GetMapping("/schedules/{userId}")
+    @GetMapping("user/{userId}")
     @ResponseBody
     fun getByUserId(@PathVariable userId: Long): List<ScheduleDetails> {
         return scheduleService.getByUserId(userId)
     }
 
-    @GetMapping("/schedules/{classroomId}")
+    @GetMapping("classroom/{classroomId}")
     @ResponseBody
     fun getByClassroomId(@PathVariable classroomId: Long): List<ScheduleDetails> {
         return scheduleService.getByClassroomId(classroomId)

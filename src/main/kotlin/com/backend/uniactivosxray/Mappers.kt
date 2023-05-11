@@ -121,10 +121,12 @@ interface UserMapper {
         user: User,
     ): UserDetails
 
-     fun userLoginInputToUser(
-         userLoginInput: UserLoginInput,
-     ): User
+    fun userLoginInputToUser(
+        userLoginInput: UserLoginInput,
+    ): User
 
-     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-     fun taskInputToTask(dto: UserLoginInput, @MappingTarget users: User)
+    fun userChangePasswordInputToUser(
+        userUserChangePasswordInput: UserChangePasswordInput,
+    ): User
+
 }

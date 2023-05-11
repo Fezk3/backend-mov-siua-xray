@@ -61,6 +61,7 @@ interface ScheduleRepository : JpaRepository<Schedule, Long> {
 
 @Repository
 interface FormRepository : JpaRepository<Form, Long> {
+    fun findByClassroomId(@Param("classroomId") classroomId : Long) : List<Form>
 }
 
 @Repository

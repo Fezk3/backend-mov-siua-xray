@@ -29,10 +29,8 @@ class ScheduleRepositoryTest (
     }
 
     @Test
-    fun testScheduleUpdate() {
-        val scheduleUpdated: Schedule = scheduleRepository.findById(1).get()
-        scheduleUpdated.courseName = "Discrete Mathematics"
-        scheduleRepository.save(scheduleUpdated)
-        assertEquals("Discrete Mathematics", scheduleRepository.findById(1).get().courseName)
+    fun testScheduleFindByClassroomId() {
+        val scheduleList: List<Schedule> = scheduleRepository.findByClassroomId(2)
+        Assertions.assertTrue(scheduleList.size == 2)
     }
 }

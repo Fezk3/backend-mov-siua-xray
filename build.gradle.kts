@@ -18,6 +18,13 @@ repositories {
 }
 
 dependencies {
+	//JWT
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
+
+	//Spring Security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.security:spring-security-test")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
 	kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")

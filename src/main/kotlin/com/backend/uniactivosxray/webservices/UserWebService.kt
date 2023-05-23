@@ -22,21 +22,4 @@ class UserController(private val userService: UserService) {
         userService.userChangePassword(userChangePasswordInput.email, userChangePasswordInput.oldPassword, userChangePasswordInput.newPassword)
         return ResponseEntity.noContent().build()
     }
-/*
-    @PostMapping(value = ["/loginn"], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseBody
-    fun userLoginn(@RequestBody userLoginInput: UserLoginInput): Optional<User> {
-        return userService.userLogin(userLoginInput.email, userLoginInput.password)
-    }
-
-    @PostMapping("/login")
-    fun userLogin(@RequestBody userLoginInput: UserLoginInput): ResponseEntity<User> {
-        val user: Optional<User> = userService.userLogin(userLoginInput.email, userLoginInput.password)
-        return if (user.isPresent) {
-            ResponseEntity.ok(user.get())
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
-*/
 }

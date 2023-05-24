@@ -126,6 +126,7 @@ interface UserMapper {
         userLoginInput: UserLoginInput,
     ): User
 
+   // @Mapping(target = "enabled", defaultExpression = "true")
     fun userChangePasswordInputToUser(
         userUserChangePasswordInput: UserChangePasswordInput,
     ): User

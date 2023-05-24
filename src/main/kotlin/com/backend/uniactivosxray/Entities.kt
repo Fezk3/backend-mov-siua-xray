@@ -91,6 +91,7 @@ data class User(
     var lastName: String,
     var password: String,
     var email: String,
+    var enabled: Boolean,
     var tokenExpired: Boolean?,
 
     // Entity Relationship
@@ -125,7 +126,7 @@ data class User(
     }
 
     override fun toString(): String {
-        return "User(id=$id, firstName='$firstName', lastName='$lastName', password='$password', email='$email', tokenExpired=$tokenExpired, roleList=$roleList)"
+        return "User(id=$id, firstName='$firstName', lastName='$lastName', password='$password', email='$email', enabled=$enabled, tokenExpired=$tokenExpired, roleList=$roleList)"
     }
 
 }

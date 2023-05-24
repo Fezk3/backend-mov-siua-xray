@@ -32,13 +32,13 @@ object SecurityConstants {
     const val TOKEN_PREFIX = "Bearer "
     const val APPLICATION_JSON = "application/json"
     const val UTF_8 = "UTF-8"
-    val TOKEN_SECRET = Base64.getEncoder().encodeToString("secret".toByteArray())
+    val TOKEN_SECRET: String = Base64.getEncoder().encodeToString("secret".toByteArray())
 }
 
 class JwtAuthenticationFilter(authenticationManager: AuthenticationManager) : UsernamePasswordAuthenticationFilter() {
 
-    @Value("\${url.login}")
-    var loginUrl: String? = null
+    //@Value("\${url.login}")
+    //var loginUrl: String? = null
 
     private val authManager: AuthenticationManager
 
@@ -50,28 +50,24 @@ class JwtAuthenticationFilter(authenticationManager: AuthenticationManager) : Us
     @Throws(AuthenticationException::class)
     override fun attemptAuthentication(
         request: HttpServletRequest,
-        response: HttpServletResponse
+        response: HttpServletResponse,
     ): Authentication {
         if (request.method != "POST") {
-            throw AuthenticationServiceException(
-                "Authentication method not supported: " + request.method
-            )
+            throw AuthenticationServiceException("Authentication method not supported: $request.method")
         }
-        try {
+        return try {
             // UserLoginInput es el dto
-            val userLoginInput: UserLoginInput = ObjectMapper().readValue(
-                request.inputStream,
-                UserLoginInput::class.java
-            )
+            val userLoginInput: UserLoginInput = ObjectMapper()
+                .readValue(request.inputStream, UserLoginInput::class.java)
             // autManager es el encargado de autenticar por debajo
-            return authManager.authenticate(
+            authManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                     userLoginInput.email,
                     userLoginInput.password,
                     ArrayList())
             )
-        } catch (e: IOException) {
-            throw RuntimeException(e)
+        } catch (exception: IOException) {
+            throw RuntimeException(exception)
         }
     }
 
@@ -120,15 +116,34 @@ class JwtAuthorizationFilter(authenticationManager: AuthenticationManager) :
             //Quitamos el bearer del token
 
             authorizationToken = authorizationToken.replaceFirst(SecurityConstants.TOKEN_PREFIX.toRegex(), "")
-            val username: String = Jwts.parser()
+            val email: String = Jwts.parser()
                 .setSigningKey(SecurityConstants.TOKEN_SECRET)
                 .parseClaimsJws(authorizationToken)
                 .getBody()
                 .getSubject()
+            LoggedUser.logIn(email)
             SecurityContextHolder.getContext().authentication =
-                UsernamePasswordAuthenticationToken(username, null, emptyList())
+                UsernamePasswordAuthenticationToken(email, null, emptyList())
         }
 
         filterChain.doFilter(request, response)
+    }
+}
+
+/**
+ * Object to holder the user information
+ */
+object LoggedUser {
+    private val userHolder = ThreadLocal<String>()
+    fun logIn(user: String) {
+        userHolder.set(user)
+    }
+
+    fun logOut() {
+        userHolder.remove()
+    }
+
+    fun get(): String {
+        return userHolder.get()
     }
 }

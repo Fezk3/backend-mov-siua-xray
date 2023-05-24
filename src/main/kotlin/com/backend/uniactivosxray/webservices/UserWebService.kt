@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("\${url.user}")
 class UserController(private val userService: UserService) {
 
     @GetMapping("/privileges/{roles}")

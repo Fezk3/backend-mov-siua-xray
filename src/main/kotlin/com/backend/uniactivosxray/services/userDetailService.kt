@@ -1,9 +1,6 @@
 package com.backend.uniactivosxray.services
 
-import com.backend.uniactivosxray.Privilege
-import com.backend.uniactivosxray.Role
-import com.backend.uniactivosxray.RoleRepository
-import com.backend.uniactivosxray.UserRepository
+import com.backend.uniactivosxray.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -27,13 +24,13 @@ class AppUserDetailsService(
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val userAuth: org.springframework.security.core.userdetails.User
-        val user = userRepository.findByEmail(username).orElse(null)
+        val user: User = userRepository.findByEmail(username).orElse(null)
             ?: return org.springframework.security.core.userdetails.User(
                 " ", " ", true, true, true, true,
-                getAuthorities(listOf(roleRepository.findByName("ROLE_USER").get()))
-            )
+                getAuthorities(Arrays.asList(
+                    roleRepository.findByName("ROLE_USER").get())))
         userAuth = org.springframework.security.core.userdetails.User(
-            user.email, user.password, true, true, true,
+            user.email, user.password, user.enabled, true, true,
             true, getAuthorities(user.roleList!!.toMutableList()))
 
         return userAuth
@@ -41,12 +38,12 @@ class AppUserDetailsService(
     }
 
     private fun getAuthorities(
-        roles: List<Role>,
+        roles: MutableList<Role>,
     ): Collection<GrantedAuthority?> {
         return getGrantedAuthorities(getPrivileges(roles))
     }
 
-    private fun getPrivileges(roles: List<Role>): List<String> {
+    private fun getPrivileges(roles: MutableList<Role>?): List<String> {
         val privileges: MutableList<String> = ArrayList()
         val collection: MutableList<Privilege> = ArrayList()
         if (roles != null) {

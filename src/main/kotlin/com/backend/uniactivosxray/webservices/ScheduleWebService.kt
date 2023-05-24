@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/schedules")
+@RequestMapping("\${url.schedule}")
 class ScheduleController(private val scheduleService: ScheduleService) {
 
     @GetMapping

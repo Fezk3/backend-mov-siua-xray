@@ -6,7 +6,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/classroom")
+@RequestMapping("\${url.classroom}")
 class ClassroomController(private val clasroomService: ClassroomService){
 
     @GetMapping

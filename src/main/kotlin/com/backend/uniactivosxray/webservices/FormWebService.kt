@@ -6,7 +6,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/form")
+@RequestMapping("\${url.form}")
 
 class FormController(private val formService: FormService) {
 

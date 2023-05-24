@@ -6,7 +6,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/assets")
+@RequestMapping("\${url.asset}")
 class AssetController(private val assetService: AssetService) {
 
     @GetMapping

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/form-history")
+@RequestMapping("\${url.form-history}")
 class FormHistoryController(private val formHistoryService: FormHistoryService) {
 
     @GetMapping

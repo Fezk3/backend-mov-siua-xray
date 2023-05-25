@@ -26,15 +26,15 @@ class AppUserDetailsService(
         val userAuth: org.springframework.security.core.userdetails.User
         val user: User = userRepository.findByEmail(username).orElse(null)
             ?: return org.springframework.security.core.userdetails.User(
-                " ", " ", true, true, true, true,
+                "", "", true, true, true, true,
                 getAuthorities(Arrays.asList(
                     roleRepository.findByName("ROLE_USER").get())))
+
         userAuth = org.springframework.security.core.userdetails.User(
             user.email, user.password, user.enabled, true, true,
             true, getAuthorities(user.roleList!!.toMutableList()))
 
         return userAuth
-
     }
 
     private fun getAuthorities(

@@ -93,6 +93,7 @@ class JwtSecurityConfiguration{
                     .antMatchers("/".plus(URL_UNSECURE).plus("/**")).permitAll()
                     .antMatchers(HttpMethod.POST, URL_SIGNUP).permitAll()
                     .antMatchers("/**").authenticated()
+                    .antMatchers(HttpMethod.POST, "/v1/users/login").permitAll()
             }
             .sessionManagement{
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

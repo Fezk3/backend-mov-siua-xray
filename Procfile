@@ -1,0 +1,1 @@
+web: java -jar build/libs/uniactivosxray-1.0.jar

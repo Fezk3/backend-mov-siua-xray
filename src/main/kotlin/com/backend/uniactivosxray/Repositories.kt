@@ -38,10 +38,13 @@ interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
 
     @Query("SELECT f FROM FormHistory f WHERE f.state = 'Pendiente'")
     fun findPending(): List<FormHistory>
-    @Transactional
+
+    // metodo que en base a un id cambie el estado del formHistory a Recibido y el user_id a 2
     @Modifying
-    @Query("UPDATE FormHistory f SET f.state = 'Recibido' WHERE f.id = :id")
-    fun updateState(@Param("id") id: Long)
+    @Transactional
+    @Query("UPDATE FormHistory f SET f.state = 'Recibido', f.userId = 2 WHERE f.id = :id")
+    fun updateFormHistory(@Param("id") id: Long)
+
 
 }
 

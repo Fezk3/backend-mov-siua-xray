@@ -43,7 +43,7 @@ class FormHistoryController(private val formHistoryService: FormHistoryService,
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long): ResponseEntity<FormHistory> {
-        formHistoryRepository.updateState(id)
+        formHistoryRepository.updateFormHistory(id)
         return ResponseEntity.ok().build()
     }
 

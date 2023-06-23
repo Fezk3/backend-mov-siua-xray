@@ -61,30 +61,22 @@ data class ClassroomDetails(
     var assetsList: List<AssetsDetails>? = null,
 )
 
-data class FormDetails(
-    var id: Long? = null,
-)
-
-data class StatusDetails(
-    var id: Long? = null,
-    var description: String? = null,
-)
-
 data class FormHistoryDetails(
     var id: Long? = null,
-    var form: FormDetails? = null,
-    var user: UserDetails? = null,
+    var formid: Long? = null,
+    var userId: Long? = null,
     var date: Date? = null,
-    var state: StatusDetails? = null,
+    var state: String? = null,
+    var classroomNumber: String? = null,
 )
 
 data class FormHistoryInput(
-    var formId: Long? = null,
+    var formid: Long? = null,
     var userId: Long? = null,
     @JsonFormat(pattern="dd/MM/yyyy")
     var date: Date? = null,
     var state: String? = null,
-    var classroomId : Long? = null,
+    var classroomNumber : String? = null,
 )
 
 data class ScheduleDetails(

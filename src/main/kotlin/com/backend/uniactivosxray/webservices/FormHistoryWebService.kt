@@ -1,9 +1,9 @@
 package com.backend.uniactivosxray.webservices
 
-import com.backend.uniactivosxray.FormHistory
-import com.backend.uniactivosxray.FormHistoryDetails
-import com.backend.uniactivosxray.FormHistoryInput
+import com.backend.uniactivosxray.*
 import com.backend.uniactivosxray.services.FormHistoryService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("\${url.form-history}")
-class FormHistoryController(private val formHistoryService: FormHistoryService) {
+class FormHistoryController(private val formHistoryService: FormHistoryService,
+    @Autowired
+    val formHistoryRepository: FormHistoryRepository) {
 
     @GetMapping
     @ResponseBody
@@ -19,11 +21,30 @@ class FormHistoryController(private val formHistoryService: FormHistoryService) 
         return formHistoryService.getAll()
     }
 
+    @GetMapping("/pendientes")
+    @ResponseBody
+    fun getPendientes(): List<FormHistory> {
+        return formHistoryRepository.findPending()
+    }
+
     @PostMapping
     fun create(@RequestBody formHistoryInput: FormHistoryInput): ResponseEntity<FormHistory> {
+        println("formHistoryInput: $formHistoryInput")
+
         val formHistory = formHistoryService.create(formHistoryInput)
+
+        println("formHistory: $formHistory")
+
         val formHistoryPendiendiente = formHistoryInput.copy(state = "Pendiente")
+        formHistoryPendiendiente.formid = formHistoryInput.formid
+        formHistoryService.create(formHistoryPendiendiente)
         return ResponseEntity.ok(formHistory)
+    }
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long): ResponseEntity<FormHistory> {
+        formHistoryRepository.updateState(id)
+        return ResponseEntity.ok().build()
     }
 
 }

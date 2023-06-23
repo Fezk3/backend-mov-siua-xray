@@ -18,12 +18,10 @@ class AbstractFormHistoryService(
     val formHistoryRepository: FormHistoryRepository,
     @Autowired
     val formHistoryMapper: FormHistoryMapper,
-    @Autowired
-    val formRepository: FormRepository,
+
     @Autowired
     val userRepository: UserRepository,
 
-    val state : String = "Entregado",
 ) : FormHistoryService {
 
     override fun getAll(): List<FormHistoryDetails> {

@@ -62,28 +62,6 @@ interface ClassroomMapper {
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-interface FormMapper {
-    fun formToFormDetails(
-        form: Form,
-    ): FormDetails
-
-    fun formListToFormDetailsList(
-        formList: List<Form>,
-    ): List<FormDetails>
-}
-
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-interface StatusMapper {
-    fun statusToStatusDetails(
-        status: State,
-    ): StatusDetails
-
-    fun statusListToStatusDetailsList(
-        statusList: List<State>,
-    ): List<StatusDetails>
-}
-
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface ScheduleMapper {
     fun scheduleToScheduleDetails(
         schedule: Schedule,
@@ -99,9 +77,7 @@ interface ScheduleMapper {
      componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE
  )
 interface FormHistoryMapper {
-    fun formHistoryToFormHistoryDetails(
-        formHistory: FormHistory,
-    ): FormHistoryDetails
+
 
     fun formHistoryListToFormHistoryDetailsList(
         formHistoryList: List<FormHistory>,
@@ -112,8 +88,7 @@ interface FormHistoryMapper {
          formHistoryInput: FormHistoryInput,
      ): FormHistory
 
-     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-     fun formHistoryInputToFormHistory(dto: FormHistoryInput, @MappingTarget formHistory: FormHistory)
+
 }
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)

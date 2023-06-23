@@ -1,9 +1,11 @@
 package com.backend.uniactivosxray
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Repository
@@ -36,6 +38,10 @@ interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
 
     @Query("SELECT f FROM FormHistory f WHERE f.state = 'Pendiente'")
     fun findPending(): List<FormHistory>
+    @Transactional
+    @Modifying
+    @Query("UPDATE FormHistory f SET f.state = 'Recibido' WHERE f.id = :id")
+    fun updateState(@Param("id") id: Long)
 
 }
 
@@ -61,11 +67,6 @@ interface AssetTypeRepository : JpaRepository<AssetType, Long> {
 interface ScheduleRepository : JpaRepository<Schedule, Long> {
     fun findByUserId(@Param("userId") userId : Long) : List<Schedule>
     fun findByClassroomId(@Param("classroomId") classroomId : Long) : List<Schedule>
-}
-
-@Repository
-interface FormRepository : JpaRepository<Form, Long> {
-    fun findByClassroomId(@Param("classroomId") classroomId : Long) : List<Form>
 }
 
 @Repository

@@ -63,7 +63,6 @@ data class ClassroomDetails(
 
 data class FormDetails(
     var id: Long? = null,
-    var classroom: ClassroomDetails? = null,
 )
 
 data class StatusDetails(
@@ -82,9 +81,10 @@ data class FormHistoryDetails(
 data class FormHistoryInput(
     var formId: Long? = null,
     var userId: Long? = null,
-    var statusId: Long? = null,
     @JsonFormat(pattern="dd/MM/yyyy")
     var date: Date? = null,
+    var state: String? = null,
+    var classroomId : Long? = null,
 )
 
 data class ScheduleDetails(

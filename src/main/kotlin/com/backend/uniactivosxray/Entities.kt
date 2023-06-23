@@ -300,9 +300,7 @@ data class FormHistory(
 
     var date: Date,
 
-    @ManyToOne
-    @JoinColumn(name = "IdState")
-    var state: State
+    var state: String,
 ){
 
     override fun equals(other: Any?): Boolean {
@@ -320,39 +318,6 @@ data class FormHistory(
 
     override fun toString(): String {
         return "FormHistory(id=$id, form=$form, user=$user)"
-    }
-
-}
-
-@Entity
-@Table(name = "state")
-data class State(
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
-    var description: String,
-
-    // Entity Relationship with FormHistory
-    @OneToMany(mappedBy = "state")
-    var formHistoryList: Set<FormHistory>,
-){
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Role) return false
-
-        if (id != other.id) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
-    }
-
-    override fun toString(): String {
-        return "State(id=$id, description='$description', formHistoryList=$formHistoryList)"
     }
 
 }

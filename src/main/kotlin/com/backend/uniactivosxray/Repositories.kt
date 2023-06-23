@@ -33,6 +33,10 @@ interface AssetsRepository : JpaRepository<Assets, Long> {
 
 @Repository
 interface FormHistoryRepository : JpaRepository<FormHistory, Long> {
+
+    @Query("SELECT f FROM FormHistory f WHERE f.state = 'Pendiente'")
+    fun findPending(): List<FormHistory>
+
 }
 
 @Repository
@@ -62,11 +66,6 @@ interface ScheduleRepository : JpaRepository<Schedule, Long> {
 @Repository
 interface FormRepository : JpaRepository<Form, Long> {
     fun findByClassroomId(@Param("classroomId") classroomId : Long) : List<Form>
-}
-
-@Repository
-interface StateRepository : JpaRepository<State, Long> {
-    fun findByDescription(@Param("description") description : String) : Optional<State>
 }
 
 @Repository

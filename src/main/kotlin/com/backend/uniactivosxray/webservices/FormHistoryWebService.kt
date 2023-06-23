@@ -22,6 +22,7 @@ class FormHistoryController(private val formHistoryService: FormHistoryService) 
     @PostMapping
     fun create(@RequestBody formHistoryInput: FormHistoryInput): ResponseEntity<FormHistory> {
         val formHistory = formHistoryService.create(formHistoryInput)
+        val formHistoryPendiendiente = formHistoryInput.copy(state = "Pendiente")
         return ResponseEntity.ok(formHistory)
     }
 

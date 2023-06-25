@@ -51,6 +51,7 @@ data class AssetTypeDetails(
 data class AssetsDetails(
     var id: Long? = null,
     var name: String? = null,
+    var quantity: Int? = null,
     var assetType: AssetTypeDetails? = null,
 )
 

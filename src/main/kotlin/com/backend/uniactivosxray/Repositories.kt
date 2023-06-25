@@ -24,8 +24,11 @@ interface AssetsRepository : JpaRepository<Assets, Long> {
 
     fun findByClassroomId(@Param("classroomId") classroomId: Long): List<Assets>
 
-    @Query("SELECT a FROM Assets a WHERE a.assetType.description = :description AND a.classroom.id = :classroomId")
-    fun findByAssetTypeAndClassroomId(@Param("description") description: String, @Param("classroomId") classroomId: Long): List<Assets>
+    @Query("SELECT a FROM Assets a WHERE a.assetType.description = 'Estatico' AND a.classroom.classNumber = :classNumber")
+    fun findByAssetEstaticoAndClassroomId(@Param("classNumber") classroomNumber: String): List<Assets>
+
+    @Query("SELECT a FROM Assets a WHERE a.assetType.description = 'Dinamico' AND a.classroom.classNumber = :classNumber")
+    fun findByAssetDinamicoAndClassroomId(@Param("classNumber") classNumber: String): List<Assets>
 
     @Query("SELECT a FROM Assets a WHERE a.classroom IN (SELECT c FROM Classroom c WHERE c.classNumber = :classNumber)")
     fun findByClassroomNumber(@Param("classNumber") classNumber: String): List<Assets>

@@ -22,10 +22,16 @@ class AssetController(private val assetService: AssetService) {
         return assetService.getByClassroomNumber(number)
     }
 
-    @GetMapping("/assets/{description}/{classroomId}")
+    @GetMapping("/dinamicos/{classNumber}")
     @ResponseBody
-    fun getByAssetTypeAndClassroomId(@PathVariable description: String, @PathVariable classroomId: Long): List<AssetsDetails> {
-        return assetService.getByAssetTypeAndClassroomId(description, classroomId)
+    fun getByAssetDinamicoAndClassroomId(@PathVariable classNumber:String): List<AssetsDetails> {
+        return assetService.getByAssetDinamicoAndClassroomId(classNumber)
+    }
+
+    @GetMapping("/estaticos/{classNumber}")
+    @ResponseBody
+    fun getByAssetEstaticoAndClassroomId(@PathVariable classNumber:String): List<AssetsDetails> {
+        return assetService.getByAssetEstaticoAndClassroomId(classNumber)
     }
 
 }

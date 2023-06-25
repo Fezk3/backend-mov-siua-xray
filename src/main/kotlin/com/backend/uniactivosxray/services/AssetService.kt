@@ -9,7 +9,9 @@ interface AssetService {
     fun getAll(): List<AssetsDetails>
     fun getByClassroomId(classroomId: Long): List<AssetsDetails>
     fun getByClassroomNumber(classroomNumber: String): List<AssetsDetails>
-    fun getByAssetTypeAndClassroomId(description: String, classroomId: Long): List<AssetsDetails>
+    fun getByAssetDinamicoAndClassroomId(classroomNumber: String): List<AssetsDetails>
+
+    fun getByAssetEstaticoAndClassroomId(classroomNumber: String): List<AssetsDetails>
 }
 
 @Service
@@ -39,8 +41,13 @@ class AbstractAssetService(
         return assetsMapper.assetsListToAssetsDetailsList(assetsList)
     }
 
-    override fun getByAssetTypeAndClassroomId(description: String, classroomId: Long): List<AssetsDetails> {
-        val assetsList: List<Assets> = assetsRepository.findByAssetTypeAndClassroomId(description, classroomId)
+    override fun getByAssetDinamicoAndClassroomId(classroomNumber: String): List<AssetsDetails> {
+        val assetsList: List<Assets> = assetsRepository.findByAssetDinamicoAndClassroomId(classroomNumber)
+        return assetsMapper.assetsListToAssetsDetailsList(assetsList)
+    }
+
+    override fun getByAssetEstaticoAndClassroomId(classroomNumber: String): List<AssetsDetails> {
+        val assetsList: List<Assets> = assetsRepository.findByAssetEstaticoAndClassroomId(classroomNumber)
         return assetsMapper.assetsListToAssetsDetailsList(assetsList)
     }
 
